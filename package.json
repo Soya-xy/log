@@ -45,7 +45,7 @@
         "category": "Log"
       },
       {
-        "command": "log.removeConsoleLogsWorkspace", 
+        "command": "log.removeConsoleLogsWorkspace",
         "title": "🌍 Remove Console Logs (Workspace)",
         "category": "Log"
       },
@@ -79,8 +79,17 @@
         "log.removeConsole": {
           "type": "object",
           "default": {
-            "methods": ["log", "warn", "error", "info", "debug"],
-            "preservePatterns": ["TODO", "KEEP"],
+            "methods": [
+              "log",
+              "warn",
+              "error",
+              "info",
+              "debug"
+            ],
+            "preservePatterns": [
+              "TODO",
+              "KEEP"
+            ],
             "includeTrailingNewLine": true
           },
           "description": "Remove console.* configuration: methods to target, patterns to preserve if found inside args, and whether to remove the trailing newline if the whole line only contained the call."
@@ -88,8 +97,13 @@
         "log.removeConsole.workspace": {
           "type": "object",
           "default": {
-            "includeGlobs": ["**/*.{js,jsx,ts,tsx}"] ,
-            "excludeGlobs": ["**/node_modules/**", "**/dist/**"],
+            "includeGlobs": [
+              "**/*.{js,jsx,ts,tsx}"
+            ],
+            "excludeGlobs": [
+              "**/node_modules/**",
+              "**/dist/**"
+            ],
             "confirm": true
           },
           "description": "Workspace removal options: include / exclude globs and confirmation toggle."
@@ -97,7 +111,9 @@
         "codeLoc.config.colors": {
           "type": "array",
           "default": [],
-            "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "description": "Optional fixed color list for log styling; overrides randomColor when non-empty."
         }
       }
@@ -107,7 +123,7 @@
     "dev": "pnpm build --watch",
     "test": "vitest run",
     "test:watch": "vitest",
-    "build": "tsup src/index.ts --external vscode",
+    "build": "tsdown src/index.ts --external vscode --format cjs",
     "pack": "vsce package --no-dependencies",
     "lint": "eslint --cache",
     "lint:fix": "pnpm lint --fix",
@@ -118,18 +134,17 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.16.0",
     "@types/vscode": "1.77.0",
-    "@vscode-use/utils": "^0.1.59",
-    "@vscode/vsce": "^3.6.0",
+    "@vscode-use/utils": "^0.1.61",
+    "@vscode/vsce": "^3.7.1",
     "bumpp": "^9.11.1",
     "eslint": "^8.57.1",
-    "esno": "^0.16.3",
-    "tsup": "^6.7.0",
-    "typescript": "^5.9.2",
+    "tsdown": "^0.18.2",
+    "typescript": "^5.9.3",
     "vitest": "^0.29.8"
   },
   "keywords": [
     "vscode",
-    "extension", 
+    "extension",
     "console.log",
     "logging",
     "developer tools",
