@@ -9,13 +9,18 @@ export interface Segment { start: number; end: number; method: string }
 function isIdent(ch: string) { return /[A-Za-z0-9_$]/.test(ch) }
 
 // Heuristic cleanup: expand segment to cover logical/comma operators that would be left dangling.
-function expandForOperators(text: string, seg: Segment): Segment {
+function expandForOperators(text: string, seg: Segment, includeTrailingNewLine: boolean): Segment {
   let { start, end } = seg
   // Trim trailing whitespace first
   while (end < text.length && /[ \t]/.test(text[end])) end++
-  // Include following newline if only whitespace remains on the line after deletion
-  const lineEndIdx = (() => { const n = text.indexOf('\n', end); return n === -1 ? text.length : n })()
-  if (/^\s*$/.test(text.slice(end, lineEndIdx))) end = lineEndIdx + 1
+  // Include following newline only if the console call is the only thing on that line (ignoring whitespace)
+  if (includeTrailingNewLine) {
+    const lineStartIdx = (() => { const n = text.lastIndexOf('\n', start - 1); return n === -1 ? 0 : n + 1 })()
+    const lineEndIdx = (() => { const n = text.indexOf('\n', end); return n === -1 ? text.length : n })()
+    const onlyWsBefore = text.slice(lineStartIdx, start).trim().length === 0
+    const onlyWsAfter = /^\s*$/.test(text.slice(end, lineEndIdx))
+    if (onlyWsBefore && onlyWsAfter && lineEndIdx < text.length) end = lineEndIdx + 1
+  }
 
   // Check preceding operator
   let k = start - 1
@@ -133,13 +138,13 @@ export function computeConsoleSegments(text: string, cfg: RemoveConsoleConfigInt
             const argsSlice = text.slice(argsStart, j - 1)
             if (shouldPreserve(argsSlice)) { i = j; continue }
             // trailing whitespace & semicolon
-            while (j < len && /\s/.test(text[j])) j++
+            while (j < len && /[ \t]/.test(text[j])) j++
             if (text[j] === ';') j++
             // optional newline removal decided later by expand
             const lineStart = (() => { let k2 = i; while (k2 > 0 && text[k2 - 1] !== '\n') k2--; return k2 })()
             const onlyWsBefore = text.slice(lineStart, i).trim().length === 0
             const rawSeg: Segment = { start: onlyWsBefore ? lineStart : i, end: j, method }
-            const expanded = expandForOperators(text, rawSeg)
+            const expanded = expandForOperators(text, rawSeg, cfg.includeTrailingNewLine !== false)
             segments.push(expanded)
             i = expanded.end
             continue

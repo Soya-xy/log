@@ -40,8 +40,7 @@
 
 | 快捷键 | 操作 |
 |--------|------|
-| `Ctrl+L` (Windows/Linux)<br>`Cmd+L` (macOS) | 插入 console.log 语句 |
-| `Ctrl+Shift+L` (Windows/Linux)<br>`Cmd+Shift+L` (macOS) | 从当前文件删除控制台日志 |
+| `Ctrl+Shift+L` (Windows/Linux)<br>`Cmd+Shift+L` (macOS) | 插入 console.log 语句 |
 
 ## 🎮 命令
 
@@ -73,7 +72,7 @@
 ### 基本用法
 ```javascript
 const user = { name: 'John', age: 30 };
-// 将光标放在 'user' 上并按 Ctrl+L
+// 将光标放在 'user' 上并按 Ctrl+Shift+L
 // 结果: console.log('📁 file.js:2 user:', user);
 ```
 
@@ -85,7 +84,7 @@ const config = {
     timeout: 5000
   }
 };
-// 将光标放在对象的任何位置并按 Ctrl+L
+// 将光标放在对象的任何位置并按 Ctrl+Shift+L
 // 日志将在结束大括号后插入
 ```
 
@@ -110,7 +109,7 @@ console.warn('KEEP: 重要警告'); // 这个会被保留
 1. 从 VS Code 市场安装扩展
 2. 打开任何 JavaScript/TypeScript 文件
 3. 将光标放在变量上
-4. 按 `Ctrl+L` (macOS 上按 `Cmd+L`)
+4. 按 `Ctrl+Shift+L` (macOS 上按 `Cmd+Shift+L`)
 5. 见证奇迹的发生！ ✨
 
 ![demo](assets/demo.gif)

@@ -55,11 +55,13 @@ export async function getLog() {
   const editor = getActiveTextEditor()
   if (!editor) return
   const selections = editor.selections
-  const allText = getActiveText()!
   const doc = editor.document
+  const sourceText = doc.getText()
+  const allText = sourceText
   const fileName = doc.fileName.split(vscode.env.appName === 'Visual Studio Code' ? '/' : '\\').slice(-1)[0]
   const suffix = fileName.split('.').slice(-1)[0]
   const data: Array<[vscode.Position, number, number, string, string]> = []
+  const ast = ts.createSourceFile('tmp.ts', sourceText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
 
   for (const selection of selections) {
   const [start, end] = getPosition(allText, selection.start.line, selection.start.character)
@@ -77,7 +79,6 @@ export async function getLog() {
       })
     }
 
-    const ast = ts.createSourceFile('tmp.ts', doc.getText(), ts.ScriptTarget.Latest, true, ts.ScriptKind.TS)
     const nodes: CapturedNode[] = []
     dashAst(ast, (currentNode: any) => {
       try {
@@ -111,7 +112,7 @@ export async function getLog() {
     }, '')
     // 注释块判断
   // Expression boundary adjustment: if inside a multi-line call/object/array literal append after that expression
-  const insertionAfterExpr = computeInsertionLine({ source: doc.getText(), offset: doc.offsetAt(selection.end), currentLine: selection.end.line })
+  const insertionAfterExpr = computeInsertionLine({ source: sourceText, offset: doc.offsetAt(selection.end), currentLine: selection.end.line })
   let targetLine = insertionAfterExpr !== undefined ? insertionAfterExpr : position.line
   // Comment block adjustment
   targetLine = computeInsertLineIfInComment(doc, targetLine - 1) + 1

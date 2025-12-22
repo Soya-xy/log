@@ -40,8 +40,7 @@
 
 | Shortcut | Action |
 |----------|--------|
-| `Ctrl+L` (Windows/Linux)<br>`Cmd+L` (macOS) | Insert console.log statement |
-| `Ctrl+Shift+L` (Windows/Linux)<br>`Cmd+Shift+L` (macOS) | Remove console logs from current file |
+| `Ctrl+Shift+L` (Windows/Linux)<br>`Cmd+Shift+L` (macOS) | Insert console.log statement |
 
 ## 🎮 Commands
 
@@ -73,7 +72,7 @@
 ### Basic Usage
 ```javascript
 const user = { name: 'John', age: 30 };
-// Place cursor on 'user' and press Ctrl+L
+// Place cursor on 'user' and press Ctrl+Shift+L
 // Result: console.log('📁 file.js:2 user:', user);
 ```
 
@@ -85,7 +84,7 @@ const config = {
     timeout: 5000
   }
 };
-// Place cursor anywhere in the object and press Ctrl+L
+// Place cursor anywhere in the object and press Ctrl+Shift+L
 // Log will be inserted AFTER the closing brace
 ```
 
@@ -110,7 +109,7 @@ console.warn('KEEP: Important warning'); // This will be kept
 1. Install the extension from VS Code Marketplace
 2. Open any JavaScript/TypeScript file
 3. Place cursor on a variable
-4. Press `Ctrl+L` (or `Cmd+L` on macOS)
+4. Press `Ctrl+Shift+L` (or `Cmd+Shift+L` on macOS)
 5. Watch the magic happen! ✨
 
 ![demo](assets/demo.gif)

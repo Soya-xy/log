@@ -45,5 +45,5 @@ if (condition) {
   })
 }
 
-// Instructions: Place cursor after 'progress' in any case above and use Ctrl+L
+// Instructions: Place cursor after 'progress' in any case above and use Ctrl+Shift+L
 // The log should be inserted after the closing bracket/brace of the expression

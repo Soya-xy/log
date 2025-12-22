@@ -26,7 +26,12 @@
   "engines": {
     "vscode": "^1.77.0"
   },
-  "activationEvents": [],
+  "activationEvents": [
+    "onCommand:log.log",
+    "onCommand:log.removeConsoleLogs",
+    "onCommand:log.removeConsoleLogsWorkspace",
+    "onCommand:log.previewRemoveConsoleLogs"
+  ],
   "contributes": {
     "commands": [
       {
@@ -53,15 +58,9 @@
     "keybindings": [
       {
         "command": "log.log",
-        "key": "ctrl+l",
-        "mac": "cmd+l",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "log.removeConsoleLogs",
         "key": "ctrl+shift+l",
-        "mac": "cmd+shift+l", 
-        "when": "editorTextFocus"
+        "mac": "cmd+shift+l",
+        "when": "editorTextFocus && !editorReadonly && (editorLangId == 'javascript' || editorLangId == 'typescript' || editorLangId == 'javascriptreact' || editorLangId == 'typescriptreact')"
       }
     ],
     "configuration": {
@@ -106,7 +105,8 @@
   },
   "scripts": {
     "dev": "pnpm build --watch",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "build": "tsup src/index.ts --external vscode",
     "pack": "vsce package --no-dependencies",
     "lint": "eslint --cache",

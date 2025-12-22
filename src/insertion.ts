@@ -25,7 +25,7 @@ export function computeInsertionLine(ctx: InsertionContext): number | undefined 
     if (ctx.offset >= node.pos && ctx.offset < node.end) {
       // If this is a target kind and spans multiple lines beyond current
       if (targetKinds.has(node.kind)) {
-        const endLine = getLineFromPosition(ctx.source, node.end)
+        const endLine = sf.getLineAndCharacterOfPosition(node.end).line
         if (endLine > ctx.currentLine) {
           // Choose the outermost enclosing node that ends latest
           if (!bestNode || node.end > bestNode.end) {
@@ -41,12 +41,6 @@ export function computeInsertionLine(ctx: InsertionContext): number | undefined 
 
   if (!bestNode) return undefined
   
-  const endLine = getLineFromPosition(ctx.source, bestNode.end)
+  const endLine = sf.getLineAndCharacterOfPosition(bestNode.end).line
   return endLine + 1
-}
-
-// More accurate line calculation from position
-function getLineFromPosition(text: string, position: number): number {
-  const beforePos = text.slice(0, position)
-  return beforePos.split('\n').length - 1
 }
