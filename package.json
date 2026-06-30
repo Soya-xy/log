@@ -60,7 +60,7 @@
         "command": "log.log",
         "key": "ctrl+shift+l",
         "mac": "cmd+shift+l",
-        "when": "editorTextFocus && !editorReadonly && (editorLangId == 'javascript' || editorLangId == 'typescript' || editorLangId == 'javascriptreact' || editorLangId == 'typescriptreact')"
+        "when": "editorTextFocus && !editorReadonly && (editorLangId == 'javascript' || editorLangId == 'typescript' || editorLangId == 'javascriptreact' || editorLangId == 'typescriptreact' || editorLangId == 'vue')"
       }
     ],
     "configuration": {
