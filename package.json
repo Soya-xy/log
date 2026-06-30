@@ -134,11 +134,11 @@
   "devDependencies": {
     "@antfu/eslint-config": "^3.16.0",
     "@types/vscode": "1.77.0",
-    "@vscode-use/utils": "^0.1.61",
-    "@vscode/vsce": "^3.7.1",
+    "@vscode-use/utils": "^0.1.62",
+    "@vscode/vsce": "^3.9.2",
     "bumpp": "^9.11.1",
     "eslint": "^8.57.1",
-    "tsdown": "^0.18.2",
+    "tsdown": "^0.18.4",
     "typescript": "^5.9.3",
     "vitest": "^0.29.8"
   },
@@ -163,5 +163,6 @@
     "colored output",
     "variable detection",
     "development workflow"
-  ]
+  ],
+  "packageManager": "pnpm@10.34.4+sha512.8768be55200ae3f2226b6527fcca2687e14bc4e5f12d7721a0f25da3df47915177058648db4177baf348120fa0ba2752d8d8d93f6beaf1fe64ae18da8de961af"
 }
